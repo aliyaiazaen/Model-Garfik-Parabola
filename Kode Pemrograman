@@ -1,0 +1,38 @@
+import numpy as np
+import matplotlib.pyplot as mtp
+
+# variabel yang diketahui
+y0 = 0.0                #ketinggian awal, m
+x0 = 0.0                #posisi awal, m
+v0 = 100                #kecepatan awal, m/s
+t0 = 0.0                #waktu awal, s
+dt = 0.0025             #periode perhitungan gerak, s
+g = 9.81                #gravitasi, m/s^2
+theta = np.deg2rad(30)
+# Mempersiapkan variabel dalam perhitungan
+y = np.array([y0])
+x = np.array([x0])
+t = np.array([t0])
+# Inisiasi Gerak Awal
+height = y0
+distance = x0
+time = t0
+#loop untuk mencari integral numerik dari gerak parabola
+while y >= 0:
+    y = v0*np.sin(theta)*t - 0.5*g*t**2
+    height = np.append(height,y)
+    x = v0*np.cos(theta)*t
+    distance = np.append(distance,x)
+    t = t + dt
+    time = np.append(time,t)
+#Menampilkan hasil perhitungan gerak parabola
+print (y)
+print (x)
+print (t)
+print ("\n\nketinggian maksimum : ",np.max(height))
+print ("jarak terjauh: ",distance[-1])
+print ("waktu sebelum menyentuh tanah : ",time[-1])
+mtp.plot(distance,height)
+mtp.xlabel('Jarak')
+mtp.ylabel('Ketinggian')
+mtp.show()
